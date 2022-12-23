@@ -9,6 +9,7 @@ class JsonResponse
     const MSG_ADDED_SUCCESSFULLY = 'responses.msg_added_successfully';
     const MSG_NOT_ALLOWED = "responses.msg_not_allowed";
     const MSG_NOT_FOUND = "responses.msg_not_found";
+    const MSG_NOT_AUTHORIZED = "responses.msg_not_authorized";
     const MSG_SUCCESS = "responses.msg_success";
     const MSG_FAILED = "responses.msg_failed";
     const MSG_UPDATED_SUCCESSFULLY = "responses.msg_updated_successfully";

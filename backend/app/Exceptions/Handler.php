@@ -2,7 +2,13 @@
 
 namespace App\Exceptions;
 
+use App\Helpers\JsonResponse;
+use App\Helpers\ResponseStatus;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -43,8 +49,20 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
+        $this->renderable(function (MethodNotAllowedHttpException $exception, $request) {
+            return JsonResponse::respondError(trans(JsonResponse::MSG_NOT_ALLOWED), ResponseStatus::NOT_ALLOWED);
+        });
+        $this->renderable(function (NotFoundHttpException $exception, $request) {
+            return JsonResponse::respondError(trans(JsonResponse::MSG_NOT_FOUND), ResponseStatus::NOT_FOUND);
+        });
+        $this->renderable(function (ModelNotFoundException $exception, $request) {
+            return JsonResponse::respondError(trans(JsonResponse::MSG_NOT_FOUND), ResponseStatus::NOT_FOUND);
+        });
+        $this->renderable(function (AccessDeniedHttpException $exception, $request) {
+            return JsonResponse::respondError(trans(JsonResponse::MSG_NOT_AUTHORIZED), ResponseStatus::ACCESS_FORBIDDEN);
+        });
+
         $this->reportable(function (Throwable $e) {
-            //
         });
     }
 }

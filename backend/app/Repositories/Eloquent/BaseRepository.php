@@ -47,6 +47,44 @@ abstract class BaseRepository implements IBaseRepository
         $model = $this->app->make($this->model());
         return $this->model = $model;
     }
+    /**
+     * @param array $columns
+     * @return mixed
+     * @throws \Exception
+     */
+    public function all($columns = array('*'), $paginate = 10)
+    {
+        return $this->model->select($columns)->paginate($paginate);
+    }
+
+    /**
+     * @param array $data
+     * @return mixed
+     */
+    public function create($data)
+    {
+        return $this->model->create($data);
+    }
+
+    /**
+     * @param array $data
+     * @param $id
+     * @param string $attribute
+     * @return mixed
+     */
+    public function update(array $data, $id, $attribute = "id")
+    {
+        return $this->model->where($attribute, '=', $id)->update($data);
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function delete($id)
+    {
+        return $this->model->destroy($id);
+    }
 
     /**
      * @param $attribute

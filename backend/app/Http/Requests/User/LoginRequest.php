@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests\User;
 
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\JsonResponse;
+use App\Http\Requests\BaseRequest;
 
-class LoginRequest extends FormRequest
+class LoginRequest extends BaseRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,17 +27,5 @@ class LoginRequest extends FormRequest
             'email' => 'required|email:rfc,dns|exists:users,email',
             'password'    => 'required|string|min:6',
         ];
-    }
-
-
-    protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
-    {
-        $response = new JsonResponse([
-            'message' => 'The given data is invalid',
-            'errors' => $validator->errors(),
-            'status' => 422
-        ], 422);
-
-        throw new \Illuminate\Validation\ValidationException($validator, $response);
     }
 }
