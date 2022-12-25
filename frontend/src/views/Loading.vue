@@ -15,7 +15,7 @@ export default {
 </script>
 <style scoped>
 #loading {
-  background-color: #63ab97;
+  background-color: #4c4c4c;
   color: white;
   justify-content: center;
 }

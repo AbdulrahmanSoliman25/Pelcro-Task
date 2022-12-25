@@ -2,10 +2,8 @@
   <v-switch
     v-model="val"
     :label="label"
-    :rules="[(v) => !!v || `${label} is required`]"
     :color="color"
-    :value="label"
-    hide-details
+    :value="value"
   ></v-switch>
 </template>
 
@@ -23,7 +21,7 @@ export default {
     },
     value: {
       type: Number,
-      default: undefined,
+      default: 0,
     },
   },
   computed: {

@@ -6,7 +6,7 @@
     v-model="val"
     :label="label"
     :type="type"
-    :rules="[(v) => !!v || `${label} is required`]"
+    :rules="rules"
   ></v-text-field>
 </template>
 
@@ -23,8 +23,14 @@ export default {
       default: "",
     },
     value: {
-      type: String,
+      type: [String, Number],
       default: "",
+    },
+    rules: {
+      type: [Object, Array],
+      default: function () {
+        return [(v) => !!v || `${this.label} is required`];
+      },
     },
   },
   computed: {
