@@ -60,13 +60,8 @@
 </template>
 
 <script>
-import AppInput from "@/components/forms/input/Index.vue";
 import { mapActions, mapGetters } from "vuex";
 export default {
-  name: "login",
-  components: {
-    AppInput,
-  },
   data() {
     return {
       status: {

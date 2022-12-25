@@ -109,6 +109,7 @@ export default {
     async updateCustomerAction({ commit, dispatch }, data) {
       commit("setLoading", true, { root: true });
       try {
+        debugger;
         const response = await CustomersService.updateCustomer(data, data.id);
 
         const toasObj = {

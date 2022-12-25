@@ -22,12 +22,11 @@ export default {
   },
   actions: {
     async loginAction({ dispatch, commit }, object) {
+      commit("setLoading", true, { root: true });
       try {
         const response = await AuthService.login(object);
         if (response.status == 200) {
           commit("setToken", response.data.token);
-          localStorage.getItem("authorization");
-          debugger;
           commit("setAdmin", response.data);
           const toasObj = {
             message: response.message,
@@ -41,7 +40,7 @@ export default {
           const toastInfo = { toasObj, type: "success" };
           dispatch("Alert/toast", toastInfo, { root: true });
           router.push({
-            name: "home",
+            name: "Home",
           });
         } else {
           const toasObj = {
@@ -60,9 +59,11 @@ export default {
       } catch (err) {
         console.log(err);
       } finally {
+        commit("setLoading", false, { root: true });
       }
     },
     async logoutAction({ dispatch, commit }) {
+      commit("setLoading", true, { root: true });
       try {
         const response = await AuthService.logout();
         if (response.status == 200) {
@@ -96,6 +97,7 @@ export default {
       } catch (err) {
         console.log(err);
       } finally {
+        commit("setLoading", false, { root: true });
       }
     },
   },

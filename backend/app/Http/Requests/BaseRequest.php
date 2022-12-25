@@ -14,7 +14,7 @@ class BaseRequest extends FormRequest
             'message' => 'The given data is invalid',
             'errors' => $validator->errors(),
             'status' => 422
-        ], 422);
+        ]);
 
         throw new \Illuminate\Validation\ValidationException($validator, $response);
     }

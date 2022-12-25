@@ -112,10 +112,10 @@
         </v-toolbar>
       </template>
       <template v-slot:item.actions="{ item }">
-        <v-icon small class="mr-2" @click.stop="showCustomer(item)"
+        <v-icon small class="mr-3" @click.stop="showCustomer(item)"
           >mdi-television</v-icon
         >
-        <v-icon small class="mr-2" @click.stop="editCustomer(item)">
+        <v-icon small class="mr-3" @click.stop="editCustomer(item)">
           mdi-pencil
         </v-icon>
         <v-icon small color="red" @click.stop="deleteCustomer(item)">
@@ -140,13 +140,11 @@
 <script>
 import { mapActions, mapGetters, mapMutations } from "vuex";
 import AppInput from "@/components/forms/input/Index.vue";
-import AppSwitch from "@/components/forms/switch/Index.vue";
 
 export default {
   name: "customers",
   components: {
     AppInput,
-    AppSwitch,
   },
   data() {
     return {
@@ -215,7 +213,7 @@ export default {
       });
     },
     handlePageChange(value) {
-      this.setPage(value)
+      this.setPage(value);
       this.getCustomersAction(this.page);
     },
 
